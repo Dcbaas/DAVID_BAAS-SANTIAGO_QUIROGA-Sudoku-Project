@@ -28,7 +28,7 @@ bool check_square(int board[][], int x, int y,){
     if(x <=2){
       for(int i{0}; i < 3; ++i){
         for(int j{0}; j < 3; ++j){
-          if(board[x][y] == board[i][j]
+          if(board[x][y] == board[i][j] && !current_space(x,y,i,j)
             return false;
         }
       }
@@ -37,7 +37,7 @@ bool check_square(int board[][], int x, int y,){
     else if(x > 2 && x < 6){
       for(int i{3}; i < 6; ++i){
         for(int j{0}; j < 3; ++j){
-          if(board[x][y] == board[i][j])
+          if(board[x][y] == board[i][j] && !current_space(x,y,i,j))
             return false;
         }
       }
@@ -46,7 +46,7 @@ bool check_square(int board[][], int x, int y,){
     else{
       for(int i{6}; i < 9; ++i{
         for(int j{0}; j < 3; ++j){
-          if(board[x][y] == board[i][j])
+          if(board[x][y] == board[i][j] && !current_space(x,y,i,j))
             return false; 
         }
       }
@@ -58,7 +58,7 @@ bool check_square(int board[][], int x, int y,){
     if(x <=2){
       for(int i{0}; i < 3; ++i){
         for(int j{2}; j < 6; ++j){
-          if(board[x][y] == board[i][j]
+          if(board[x][y] == board[i][j] && !current_space(x,y,i,j)
             return false;
         }
       }
@@ -67,7 +67,7 @@ bool check_square(int board[][], int x, int y,){
     else if(x > 2 && x < 6){
       for(int i{3}; i < 6; ++i){
         for(int j{2}; j < 6; ++j){
-          if(board[x][y] == board[i][j])
+          if(board[x][y] == board[i][j] && !current_space(x,y,i,j))
             return false;
         }
       }
@@ -76,7 +76,7 @@ bool check_square(int board[][], int x, int y,){
     else{
       for(int i{6}; i < 9; ++i{
         for(int j{2}; j < 6; ++j){
-          if(board[x][y] == board[i][j])
+          if(board[x][y] == board[i][j] && !current_space(x,y,i,j))
             return false; 
         }
       }
@@ -87,7 +87,7 @@ bool check_square(int board[][], int x, int y,){
     if(x <=2){
       for(int i{0}; i < 3; ++i){
         for(int j{6}; j < 9; ++j){
-          if(board[x][y] == board[i][j]
+          if(board[x][y] == board[i][j] && !current_space(x,y,i,j))
             return false;
         }
       }
@@ -96,7 +96,7 @@ bool check_square(int board[][], int x, int y,){
     else if(x > 2 && x < 6){
       for(int i{3}; i < 6; ++i){
         for(int j{6}; j < 9; ++j){
-          if(board[x][y] == board[i][j])
+          if(board[x][y] == board[i][j] && !current_space(x,y,i,j))
             return false;
         }
       }
@@ -105,7 +105,7 @@ bool check_square(int board[][], int x, int y,){
     else{
       for(int i{6}; i < 9; ++i{
         for(int j{6}; j < 9; ++j){
-          if(board[x][y] == board[i][j])
+          if(board[x][y] == board[i][j] && !current_space(x,y,i,j))
             return false; 
         }
       }
@@ -116,7 +116,7 @@ bool check_square(int board[][], int x, int y,){
 
 bool check_row(int board[][], int x int y){
   for(int i{0}; i < 9; ++i){
-   if(board[x][y] == board[i][y])
+   if(board[x][y] == board[i][y]i && !current_space(x,y,i,y))
      return false;
   }
   return true;
@@ -124,7 +124,7 @@ bool check_row(int board[][], int x int y){
 
 bool check_col(int board[][], int x, int y){
   for(int i{0}; i < 9; ++i){
-    if(board[x][y] == board[x][i])
+    if(board[x][y] == board[x][i] && !current_space(x,y,x,i))
       return false;
   }
   return true;
