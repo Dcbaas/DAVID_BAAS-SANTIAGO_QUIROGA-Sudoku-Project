@@ -1,13 +1,11 @@
+#include <iostream>
 
-
-
-
-int[][] sudoku_solver(int board[][]){
- return sudoku_solver(board,0,0) 
+bool sudoku_solver(int board[][]){
+ return sudoku_solver(board,0,0)
 }
 
-int[][] sudoku_solver(int board[][], int x, int y,int cover_cells){
-  //Base Case Return the board if the coverCells are 82 
+bool sudoku_solver(int board[][], int x, int y,int cover_cells){
+  //Base Case Return the board if the coverCells are 82
   if(cover_cells == 82)
     return board;
 
@@ -47,12 +45,12 @@ bool check_square(int board[][], int x, int y,){
       for(int i{6}; i < 9; ++i{
         for(int j{0}; j < 3; ++j){
           if(board[x][y] == board[i][j] && !current_space(x,y,i,j))
-            return false; 
+            return false;
         }
       }
     }
   }
-  //Check the middle row.        
+  //Check the middle row.
   else if(y > 2 && y < 6){
     //check the middle left sq.
     if(x <=2){
@@ -77,7 +75,7 @@ bool check_square(int board[][], int x, int y,){
       for(int i{6}; i < 9; ++i{
         for(int j{2}; j < 6; ++j){
           if(board[x][y] == board[i][j] && !current_space(x,y,i,j))
-            return false; 
+            return false;
         }
       }
     }
@@ -106,7 +104,7 @@ bool check_square(int board[][], int x, int y,){
       for(int i{6}; i < 9; ++i{
         for(int j{6}; j < 9; ++j){
           if(board[x][y] == board[i][j] && !current_space(x,y,i,j))
-            return false; 
+            return false;
         }
       }
     }
@@ -133,5 +131,5 @@ bool check_col(int board[][], int x, int y){
 bool current_space(int x, int y, int i, int j){
   if(x == i && y == j)
     return true;
-  return false; 
+  return false;
 }
