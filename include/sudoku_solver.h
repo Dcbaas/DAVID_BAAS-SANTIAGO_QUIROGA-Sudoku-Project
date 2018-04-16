@@ -111,3 +111,27 @@ bool check_square(int board[][], int x, int y,){
       }
     }
   }
+  return true;
+}
+
+bool check_row(int board[][], int x int y){
+  for(int i{0}; i < 9; ++i){
+   if(board[x][y] == board[i][y])
+     return false;
+  }
+  return true;
+}
+
+bool check_col(int board[][], int x, int y){
+  for(int i{0}; i < 9; ++i){
+    if(board[x][y] == board[x][i])
+      return false;
+  }
+  return true;
+}
+
+bool current_space(int x, int y, int i, int j){
+  if(x == i && y == j)
+    return true;
+  return false; 
+}
