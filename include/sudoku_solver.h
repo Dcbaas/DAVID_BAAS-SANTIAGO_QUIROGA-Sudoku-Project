@@ -20,3 +20,41 @@ int[][] sudoku_solver(int board[][], int x, int y,int cover_cells){
   if(board[x][y] != 0)
     return sudoku_solver(board, x+1, y, cover_cells + 1);
 }
+
+bool check_square(int board[][], int x, int y,){
+  //check top sq regions
+  if(y <=2){
+    //check the upper left sq.
+    if(x <=2){
+      for(int i{0}; i < 3; ++i){
+        for(int j{0}; j < 3; ++j){
+          if(board[x][y] == board[i][j]
+            return false;
+        }
+      }
+    }
+    //check the upper middle sq.
+    else if(x > 2 && x < 6){
+      for(int i{3}; i < 6; ++i){
+        for(int j{0}; j < 3; ++j){
+          if(board[x][y] == board[i][j])
+            return false;
+        }
+      }
+    }
+    //check the upper right corner
+    else{
+      for(int i{6}; i < 9; ++i{
+        for(int j{0}; j < 3; ++j){
+          if(board[x][y] == board[i][j])
+            return false; 
+        }
+      }
+    }
+  }
+  else if(y > 2 && y < 6){
+
+  }
+  else{
+
+  }
