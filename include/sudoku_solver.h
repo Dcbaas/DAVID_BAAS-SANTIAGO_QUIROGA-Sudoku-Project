@@ -52,9 +52,62 @@ bool check_square(int board[][], int x, int y,){
       }
     }
   }
+  //Check the middle row.        
   else if(y > 2 && y < 6){
-
+    //check the middle left sq.
+    if(x <=2){
+      for(int i{0}; i < 3; ++i){
+        for(int j{2}; j < 6; ++j){
+          if(board[x][y] == board[i][j]
+            return false;
+        }
+      }
+    }
+    //check the center sq.
+    else if(x > 2 && x < 6){
+      for(int i{3}; i < 6; ++i){
+        for(int j{2}; j < 6; ++j){
+          if(board[x][y] == board[i][j])
+            return false;
+        }
+      }
+    }
+    //check the middle right corner
+    else{
+      for(int i{6}; i < 9; ++i{
+        for(int j{2}; j < 6; ++j){
+          if(board[x][y] == board[i][j])
+            return false; 
+        }
+      }
+    }
   }
   else{
-
+//check the lower left sq.
+    if(x <=2){
+      for(int i{0}; i < 3; ++i){
+        for(int j{6}; j < 9; ++j){
+          if(board[x][y] == board[i][j]
+            return false;
+        }
+      }
+    }
+    //check the lower middle sq.
+    else if(x > 2 && x < 6){
+      for(int i{3}; i < 6; ++i){
+        for(int j{6}; j < 9; ++j){
+          if(board[x][y] == board[i][j])
+            return false;
+        }
+      }
+    }
+    //check the lower right corner
+    else{
+      for(int i{6}; i < 9; ++i{
+        for(int j{6}; j < 9; ++j){
+          if(board[x][y] == board[i][j])
+            return false; 
+        }
+      }
+    }
   }
