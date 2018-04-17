@@ -3,8 +3,8 @@ bool check_square(int board[9][9], int x, int y);
 bool check_row(int board[9][9], int x, int y);
 bool check_col(int board[9][9], int x, int y);
 bool current_space(int x, int y, int i, int j);
-
-
+bool sudoku_solver(int board[9][9], int x, int y,int cover_cells);
+bool sudoku_solver(int board[9][9]);
 
 
 bool sudoku_solver(int board[9][9]){
