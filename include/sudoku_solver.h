@@ -18,7 +18,7 @@ bool sudoku_solver(int board[9][9], int x, int y,int cover_cells) {
     std::cout << "Current BOARD" << std::endl;
     printBoard(board);
     //Base Case Return the board if the coverCells are 82
-    if (cover_cells == 82) {
+    if (cover_cells == 81) {
         std::cout << "AFTER" << std::endl;
         printBoard(board);
         for (int i{0}; i < 9; ++i) {
@@ -35,7 +35,6 @@ bool sudoku_solver(int board[9][9], int x, int y,int cover_cells) {
             y = 0;
         }
         //If the observed cell is covered.
-
         if (board[x][y] != 0)
             return sudoku_solver(board, x, y + 1, cover_cells + 1);
         else {
