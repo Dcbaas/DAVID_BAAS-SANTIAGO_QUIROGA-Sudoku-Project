@@ -14,7 +14,11 @@ bool sudoku_solver(int board[9][9]){
 bool sudoku_solver(int board[9][9], int x, int y,int cover_cells){
     //Base Case Return the board if the coverCells are 82
     if(cover_cells == 82)
-        //print board.1
+    for(int i{0}; i < 9; ++j){
+      for(int j{0}; j < 9; ++j)
+        std::cout << "[" << board[i][j] <<"]";
+      std::endl;
+    }
         return true;
 
     //Check if the x counter has gone over 9 and turnover
