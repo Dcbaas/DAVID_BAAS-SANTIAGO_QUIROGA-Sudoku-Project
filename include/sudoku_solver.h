@@ -5,39 +5,48 @@ bool check_col(int board[9][9], int x, int y);
 bool current_space(int x, int y, int i, int j);
 bool sudoku_solver(int board[9][9], int x, int y,int cover_cells);
 bool sudoku_solver(int board[9][9]);
+void printBoard (int array[9][9]);
+
+
 
 
 bool sudoku_solver(int board[9][9]){
     return sudoku_solver(board,0,0,0);
 }
 
-bool sudoku_solver(int board[9][9], int x, int y,int cover_cells){
+bool sudoku_solver(int board[9][9], int x, int y,int cover_cells) {
+    std::cout << "Current BOARD" << std::endl;
+    printBoard(board);
     //Base Case Return the board if the coverCells are 82
-    if(cover_cells == 82)
-    for(int i{0}; i < 9; ++j){
-      for(int j{0}; j < 9; ++j)
-        std::cout << "[" << board[i][j] <<"]";
-      std::endl;
-    }
-        return true;
-
-    //Check if the x counter has gone over 9 and turnover
-    if(x == 9){
-        ++y;
-        x = 0;
-    }
-    //If the observed cell is covered.
-    if(board[x][y] != 0)
-        return sudoku_solver(board, x+1, y, cover_cells + 1);
-    else{
-        for(int index{1}; index < 10; ++index){
-            board[x][y] == index;
-            if(check_square(board,x, y) && check_row(board,x,y) && check_col(board,x,y))
-                if(sudoku_solver(board, x+1,y, ++cover_cells))
-                    return true;
+    if (cover_cells == 82) {
+        std::cout << "AFTER" << std::endl;
+        printBoard(board);
+        for (int i{0}; i < 9; ++i) {
+            for (int j{0}; j < 9; ++j)
+                std::cout << "[" << board[i][j] << "]";
+            std::cout << std::endl;
+            return true;
         }
-        return false;
     }
+
+        //Check if the x counter has gone over 9 and turnover
+        if (y == 9) {
+            ++x;
+            y = 0;
+        }
+        //If the observed cell is covered.
+
+        if (board[x][y] != 0)
+            return sudoku_solver(board, x, y + 1, cover_cells + 1);
+        else {
+            for (int index{1}; index < 10; ++index) {
+                board[x][y] = index;
+                if (check_square(board, x, y) && check_row(board, x, y) && check_col(board, x, y))
+                    if (sudoku_solver(board, x, y + 1, ++cover_cells))
+                        return true;
+            }
+            return false;
+        }
 }
 
 bool check_square(int board[9][9], int x, int y){
@@ -153,4 +162,12 @@ bool current_space(int x, int y, int i, int j){
     if(x == i && y == j)
         return true;
     return false;
+}
+
+void printBoard (int board[9][9]) {
+    for (int i{0}; i < 9; ++i) {
+        for (int j{0}; j < 9; ++j)
+            std::cout << "[" << board[i][j] << "]";
+        std::cout << std::endl;
+    }
 }
