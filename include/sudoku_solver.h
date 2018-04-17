@@ -7,16 +7,26 @@ bool sudoku_solver(int board[][]){
 bool sudoku_solver(int board[][], int x, int y,int cover_cells){
   //Base Case Return the board if the coverCells are 82
   if(cover_cells == 82)
-    return board;
+    //print board.1
+    return true;
 
   //Check if the x counter has gone over 9 and turnover
   if(x == 9){
-    y += 1;
+    ++y;
     x = 0;
   }
   //If the observed cell is covered.
   if(board[x][y] != 0)
     return sudoku_solver(board, x+1, y, cover_cells + 1);
+  else{
+    for(int index{1}; i < 10; ++i){
+      board[x][y] == index;
+      if(check_square(board,x, y) && check_row(board,x,y) && check_col(board,x,y))
+        if(sudoku_solver(board, x+1,y, ++cover_cells))
+          return true
+    }
+    return false;
+  }
 }
 
 bool check_square(int board[][], int x, int y,){
