@@ -12,11 +12,6 @@ int main(int argc, char** argv){
                    { 9, 4, 0, 0, 0, 0, 0, 1, 0 },
                    { 0, 7, 0, 0, 0, 0, 0, 3, 0 }
         };
-        for(int i{0}; i < 9; ++j){
-          for(int j{0}; j < 9; ++j)
-            std::cout << "[" << board[i][j] <<"]";
-          std::endl;
-        }
         bool out = sudoku_solver(board);
         if(out)
           std::cout << "true" << std::endl;
