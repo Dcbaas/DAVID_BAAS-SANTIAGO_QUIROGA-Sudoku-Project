@@ -3,19 +3,21 @@ bool check_square(int board[9][9], int x, int y);
 bool check_row(int board[9][9], int x, int y);
 bool check_col(int board[9][9], int x, int y);
 bool current_space(int x, int y, int i, int j);
-bool sudoku_solver(int board[9][9], int x, int y,int cover_cells);
+bool sudoku_solver(int board[9][9], int x, int y);
 bool sudoku_solver(int board[9][9]);
 void printBoard (int array[9][9]);
 
 bool sudoku_solver(int board[9][9]){
-    return sudoku_solver(board,0,0,0);
+    return sudoku_solver(board,0,0);
 }
 
-bool sudoku_solver(int board[9][9], int x, int y,int cover_cells) {
+bool sudoku_solver(int board[9][9], int x, int y) {
 //    std::cout << "Current BOARD" << std::endl;
  //   printBoard(board);
     //Base Case Return the board if the coverCells are 80
-    if (cover_cells == 80) {
+  if(x == 8 && y == 9)
+    std::cout << "here1 now" << std::endl;
+    if (x == 8 && y == 9) {
         std::cout << "FINAL" << std::endl;
         printBoard(board);
             return true;
@@ -27,24 +29,27 @@ bool sudoku_solver(int board[9][9], int x, int y,int cover_cells) {
             y = 0;
         }
         //If the observed cell is covered.
-        if (board[x][y] != 0)
-            return sudoku_solver(board, x, y + 1, cover_cells + 1);
-        else {
+        if (board[x][y] == 0){
             for (int index{1}; index < 10; ++index) {
                 board[x][y] = index;
                 if (check_square(board, x, y) && check_row(board, x, y) && check_col(board, x, y)){
-                    if (sudoku_solver(board, x, y + 1, ++cover_cells))
+                    if (sudoku_solver(board, x, y + 1))
                         return true;
-		    else
-		      continue;
 		}
-            }
-            //Reset the sq if the set fails
-            board[x][y] = 0;
-	    if(x == 0 && y == 0)
-	      std::cout << "TOTAL FAILURE" << std::endl;
-            return false;
+            }     
         }
+        else{
+	  if(sudoku_solver(board, x, y + 1))
+	    return true;
+	  else
+	    return false;
+	}
+  if(x == 1 && y == 6){
+    std::cout << "Failure" << std::endl;
+    printBoard(board);
+  }
+  board[x][y] = 0;
+  return false;
 }
 //Check the square region
 bool check_square(int board[9][9], int x, int y){
