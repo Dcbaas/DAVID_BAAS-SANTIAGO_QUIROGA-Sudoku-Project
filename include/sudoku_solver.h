@@ -6,49 +6,45 @@ bool current_space(int row, int col, int i, int j);
 bool sudoku_solver(int board[9][9], int row, int col);
 bool sudoku_solver(int board[9][9]);
 void printBoard (int array[9][9]);
+void clearScreen();
 
 bool sudoku_solver(int board[9][9]){
     return sudoku_solver(board,0,0);
 }
 
 bool sudoku_solver(int board[9][9], int row, int col) {
-//    std::cout << "Current BOARD" << std::endl;
- //   printBoard(board);
     //Base Case Return the board if the coverCells are 80
-  if(row == 8 && col == 9)
-    std::cout << "here1 now" << std::endl;
     if (row == 8 && col == 9) {
         std::cout << "FINAL" << std::endl;
         printBoard(board);
             return true;
         }
 
-        //Check if the row counter has gone over 9 and go to next row.
-        if (col == 9) {
-            ++row;
-            col = 0;
-        }
-        //If the observed cell is covered.
-        if (board[row][col] == 0){
-            for (int index{1}; index < 10; ++index) {
-                board[row][col] = index;
-                if (check_square(board, row, col) && check_row(board, row, col) && check_col(board, row, col)){
-                    if (sudoku_solver(board, row, col + 1))
-                        return true;
-		}
-            }
-        }
-        else{
-	  if(sudoku_solver(board, row, col + 1))
-	    return true;
-	  else
+    //Check if the row counter has gone over 9 and go to next row.
+    if (col == 9) {
+        ++row;
+        col = 0;
+    }
+    //If the observed cell is covered.
+    if (board[row][col] == 0){
+        for (int index{1}; index < 10; ++index) {
+            board[row][col] = index;
+            if (check_square(board, row, col) && check_row(board, row, col) && check_col(board, row, col)){
+              clearScreen();
+              printBoard(board);
+              if (sudoku_solver(board, row, col + 1))
+                  return true;
+		        }
+      }
+    }
+    else{
+	     if(sudoku_solver(board, row, col + 1))
+	      return true;
+	  else{
 	    return false;
-	}
-  if(row == 1 && col == 6){
-    std::cout << "Failure" << std::endl;
-    printBoard(board);
-    return true;
-  }
+	 }
+ }
+
   board[row][col] = 0;
   return false;
 }
@@ -177,4 +173,8 @@ void printBoard (int board[9][9]) {
             std::cout << "[" << board[i][j] << "]";
         std::cout << std::endl;
     }
+}
+
+void clearScreen(){
+  std::cout << " \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n " << std::endl;
 }
