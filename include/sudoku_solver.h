@@ -47,6 +47,7 @@ bool sudoku_solver(int board[9][9], int x, int y) {
   if(x == 1 && y == 6){
     std::cout << "Failure" << std::endl;
     printBoard(board);
+    return true;
   }
   board[x][y] = 0;
   return false;
