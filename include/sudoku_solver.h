@@ -17,7 +17,7 @@ bool sudoku_solver(int board[9][9], int row, int col) {
     if (row == 8 && col == 9) {
         std::cout << "FINAL" << std::endl;
         printBoard(board);
-            return true;
+        return true;
         }
 
     //Check if the row counter has gone over 9 and go to next row.
@@ -30,8 +30,6 @@ bool sudoku_solver(int board[9][9], int row, int col) {
         for (int index{1}; index < 10; ++index) {
             board[row][col] = index;
             if (check_square(board, row, col) && check_row(board, row, col) && check_col(board, row, col)){
-              clearScreen();
-              printBoard(board);
               if (sudoku_solver(board, row, col + 1))
                   return true;
 		        }
@@ -48,106 +46,58 @@ bool sudoku_solver(int board[9][9], int row, int col) {
   board[row][col] = 0;
   return false;
 }
+
 //Check the square region
 bool check_square(int board[9][9], int row, int col){
-    //check top sq regions
-    if(row < 3){
-        //check the upper left sq.
-        if(col < 3){
-            for(int i{0}; i < 3; ++i){
-                for(int j{0}; j < 3; ++j){
-                    if(board[row][col] == board[i][j] && !current_space(row,col,i,j))
-                        return false;
-                }
-            }
-        }
-            //check the upper middle sq.
-        else if(col > 2 && col < 6){
-            for(int i{3}; i < 6; ++i){
-                for(int j{0}; j < 3; ++j){
-                    if(board[row][col] == board[i][j] && !current_space(row,col,i,j))
-                        return false;
-                }
-            }
-        }
-            //check the upper right corner
-        else{
-            for(int i{6}; i < 9; ++i){
-                    for(int j{0}; j < 3; ++j){
-                        if(board[row][col] == board[i][j] && !current_space(row,col,i,j))
-                            return false;
-                    }
-            }
-        }
+  int row_lower{0};
+  int row_upper{0};
+  int col_lower{0};
+  int col_upper{0};
+
+  //Check the row range
+  if(row < 3){
+    row_lower = 0;
+    row_upper = 2;
+  }
+  else if(row >= 3 && row < 6){
+    row_lower = 3;
+    row_upper = 5;
+  }
+  else{
+    row_lower = 6;
+    row_upper = 8;
+  }
+
+  //Check the col range
+  if(col < 3){
+    col_lower = 0;
+    col_upper = 2;
+  }
+  else if(col >= 3 && col < 6){
+    col_lower = 3;
+    col_upper = 5;
+  }
+  else{
+    col_lower = 6;
+    col_upper = 8;
+  }
+
+  //Check the square.
+  for(int it_row = row_lower; it_row <= row_upper; ++it_row){
+    for(int it_col = col_lower; it_col <= col_upper; ++it_col){
+      if(!current_space(row, col, it_row, it_col) && board[row][col] == board[it_row][it_col])
+        return false;
     }
-        //Check the middle sections.
-    else if(row > 2 && row < 6){
-        //check the middle left sq.
-        if(col < 3){
-            for(int i{0}; i < 3; ++i){
-                for(int j{2}; j < 6; ++j){
-                    if(board[row][col] == board[i][j] && !current_space(row,col,i,j))
-                        return false;
-                }
-            }
-        }
-            //check the center sq.
-        else if(col > 2 && col < 6){
-            for(int i{3}; i < 6; ++i){
-                for(int j{2}; j < 6; ++j){
-                    if(board[row][col] == board[i][j] && !current_space(row,col,i,j))
-                        return false;
-                }
-            }
-        }
-            //check the middle right corner
-        else{
-            for(int i{6}; i < 9; ++i){
-                    for(int j{2}; j < 6; ++j){
-                        if(board[row][col] == board[i][j] && !current_space(row,col,i,j))
-                            return false;
-                    }
-            }
-        }
-    }
-    //Check the lower sections.
-    else{
-//check the lower left sq.
-        if(col < 3){
-            for(int i{0}; i < 3; ++i){
-                for(int j{6}; j < 9; ++j){
-                    if(board[row][col] == board[i][j] && !current_space(row,col,i,j))
-                        return false;
-                }
-            }
-        }
-            //check the lower middle sq.
-        else if(col > 2 && col < 6){
-            for(int i{3}; i < 6; ++i){
-                for(int j{6}; j < 9; ++j){
-                    if(board[row][col] == board[i][j] && !current_space(row,col,i,j))
-                        return false;
-                }
-            }
-        }
-            //check the lower right corner
-        else{
-            for(int i{6}; i < 9; ++i){
-                    for(int j{6}; j < 9; ++j){
-                        if(board[row][col] == board[i][j] && !current_space(row,col,i,j))
-                            return false;
-                    }
-            }
-        }
-    }
-    return true;
+  }
+  return true;
 }
 
 //Check the row
 bool check_row(int board[9][9], int row, int col){
     for(int i{0}; i < 9; ++i){
-        if(board[row][col] == board[i][col] && !current_space(row,col,i,col))
-        return false;
+        if(board[row][col] == board[i][col] && !current_space(row,col,i,col)){
+          return false;
+        }
     }
     return true;
 }
