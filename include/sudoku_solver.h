@@ -1,4 +1,10 @@
 #include <iostream>
+/******************************************************************************
+ * The sudoku_solver.h solves a sudoku puzzle using backtracing
+ *
+ * Author: David Baas, Santiago Quiroga
+ * Version: 4/18/2018
+ ******************************************************************************/
 bool check_square(int board[9][9], int row, int col);
 bool check_row(int board[9][9], int row, int col);
 bool check_col(int board[9][9], int row, int col);
@@ -8,10 +14,27 @@ bool sudoku_solver(int board[9][9]);
 void printBoard (int array[9][9]);
 void clearScreen();
 
+ /******************************************************************************
+ * This sudoku_solver function is a driver function called by the main method
+ * to start using the second sudoku_solver function
+ * Parameter: board The current broard.
+ ******************************************************************************/
 bool sudoku_solver(int board[9][9]){
     return sudoku_solver(board,0,0);
 }
 
+/******************************************************************************
+* The sudoku_solver function takes the board and linnerally adds numbers to
+* each space. It then verifies if the number entered is valid. If it is, it
+* recursively calls itself to look at the next space. If all possible numbers
+* for a given space are found invalid the function recurses back on itself
+* to attempt to solve the sudoku board until it is finished
+*
+* Parameter: board The current broard
+* Parameter: row to check
+* Parameter: coloum to check.
+* Returns true if the board is solved, false otherwise.
+******************************************************************************/
 bool sudoku_solver(int board[9][9], int row, int col) {
     //Base Case Return the board if the coverCells are 80
     if (row == 8 && col == 9) {
@@ -47,7 +70,15 @@ bool sudoku_solver(int board[9][9], int row, int col) {
   return false;
 }
 
-//Check the square region
+/******************************************************************************
+* The check_square function looks at the square region of the space being
+* manipulated and checks if there are any duplicate values.
+*
+* Parameter: board The current broard
+* Parameter: row to check
+* Parameter: coloum to check.
+* Return: True if the there is not conflict. False otherwise
+******************************************************************************/
 bool check_square(int board[9][9], int row, int col){
   int row_lower{0};
   int row_upper{0};
@@ -92,7 +123,15 @@ bool check_square(int board[9][9], int row, int col){
   return true;
 }
 
-//Check the row
+/******************************************************************************
+* The check_row function looks at the row of the space being
+* manipulated and checks if there are any duplicate values.
+*
+* Parameter: board The current broard
+* Parameter: row to check
+* Parameter: coloum to check.
+* Return: True if the there is not conflict. False otherwise
+******************************************************************************/
 bool check_row(int board[9][9], int row, int col){
     for(int i{0}; i < 9; ++i){
         if(board[row][col] == board[i][col] && !current_space(row,col,i,col)){
@@ -102,7 +141,15 @@ bool check_row(int board[9][9], int row, int col){
     return true;
 }
 
-//check the coloum
+/******************************************************************************
+* The check_square function looks at the coloum of the space being
+* manipulated and checks if there are any duplicate values.
+*
+* Parameter: board The current broard
+* Parameter: row to check
+* Parameter: coloum to check.
+* Return: True if the there is not conflict. False otherwise
+******************************************************************************/
 bool check_col(int board[9][9], int row, int col){
     for(int i{0}; i < 9; ++i){
         if(board[row][col] == board[row][i] && !current_space(row,col,row,i))
@@ -111,6 +158,15 @@ bool check_col(int board[9][9], int row, int col){
     return true;
 }
 
+/******************************************************************************
+* Checks if the space being is the space being manipulated.
+*
+* Parameter the row being manipulated
+* Parameter: the col being manipulated
+* Parameter: The row being checked
+* Parameter: the col being checked
+* Return: True if the there is not conflict. False otherwise
+******************************************************************************/
 bool current_space(int row, int col, int i, int j){
     if(row == i && col == j)
         return true;
